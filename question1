@@ -1,0 +1,66 @@
+def validate_password(password):
+  """
+    Student Name: Dawood Sunuwar
+    Student ID: S366873
+  Question 1:
+    Validating password based on the given criteria.
+  Argument:
+    password: The password to be validated.
+  Returns:
+    True if the password is valid, False otherwise.
+  """
+  # Checking the length of the password.
+  if len(password) < 11 or len(password) > 18:
+    print("Must be in between 11 to 18 characters long):")
+    return False
+
+  # here to count the number of lowercase letters, uppercase letters, numbers, and special characters.
+  lower_case_letters = 0
+  upper_case_letters = 0
+  numbers = 0
+  special_characters = 0
+  for character in password:
+    if character.islower():
+      lower_case_letters += 1
+    elif character.isupper():
+      upper_case_letters += 1
+    elif character.isdigit():
+      numbers += 1
+    elif character in ["$", "#", "@", "!", "&", "*", "(", ")", "-", "_", "^"]:
+      special_characters += 1
+
+  # Here checking if the password contains the required characters.
+  if lower_case_letters < 2:
+    print("Password must contain at least 2 lowercase letters.")
+    return False
+  if upper_case_letters < 4:
+    print("Password must contain at least 4 uppercase letters.")
+    return False
+  if numbers < 3:
+    print("Password must contain at least 3 numbers.")
+    return False
+  if special_characters < 2:
+    print("Password must contain at least 2 special characters.")
+    return False
+
+  return True
+
+def main():
+  # Getting the comma separated passwords from the user.
+  passwords = input("Enter Passwords, comma-separated: ")
+
+  # Split the passwords into a list.
+  passwords_list = passwords.split(",")
+
+  # Validation of each password.
+  valid_passwords = []
+  for password in passwords_list:
+    if validate_password(password):
+      valid_passwords.append(password)
+
+  # Print the valid passwords.
+  print("Valid passwords: " + "||".join(valid_passwords))
+
+if __name__ == "__main__":
+  main()
+
